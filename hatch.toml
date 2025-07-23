@@ -1,0 +1,21 @@
+[version]
+source = "regex"
+scheme = "standard"
+path = "src/captchafox/__init__"
+
+[build]
+reproducible = true
+directory = "dist"
+dev-mode-dirs = ["src"]
+
+[build.targets.sdist]
+packages = ["src/captchafox"]
+only-packages = true
+
+[envs.virtual]
+python = "3.12"
+platforms = ["linux", "windows"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+allow-ambiguous-features = true
