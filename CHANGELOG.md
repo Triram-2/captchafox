@@ -1,3 +1,9 @@
+## 0.3.0 (2025-07-23)
+
+### Features
+
+- **noxfile.py**: added noxfile.py
+
 ## 0.2.0 (2025-07-23)
 
 ### Features

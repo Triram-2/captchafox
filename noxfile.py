@@ -37,9 +37,7 @@ os.environ["PYTHONDONTWRITEBYTECODE"] = "1"
 
 def install_project_with_deps(session: Session, *groups: str) -> None:
     """Устанавливает проект и его зависимости из указанных групп используя uv pip install."""
-    install_args: List[str] = (
-        ["-e", f".[{','.join(groups)}]"] if groups else ["-e", "."]
-    )
+    install_args: List[str] = ["-e", f".[{','.join(groups)}]"] if groups else ["-e", "."]
     # Construct a string for logging that represents the command as it would be typed
     log_command_str = "uv pip install " + " ".join(install_args)
     session.log(f"Installing with: {log_command_str}")
@@ -174,11 +172,14 @@ def profile(session: Session) -> None:
 @nox.session(python=False)
 def commit(session: Session) -> None:
     """Добавление проекта в git и коммит через commitizen"""
-    session.log('`git add .`...')
     session.run('git', 'add', '.')
-
-    session.log('`cz commit`..')
     session.run('cz', 'commit')
+
+@nox.session(python=False)
+def bump(session: Session) -> None:
+    "Bump через commitizen + `git push -u origin main`"
+    session.run('cz', 'bump')
+    session.run('git', 'push', '-u', 'origin', 'main')
 
 @nox.session(python=False)
 def build(session: Session) -> None:
