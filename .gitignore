@@ -1,6 +1,4 @@
-# ============================================================================
 # Операционные системы / System Files
-# ============================================================================
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -18,14 +16,10 @@ $RECYCLE.BIN/
 profile.json
 profile.html
 
-# ============================================================================
 # IDE и Редакторы / IDEs and Editors
-# ============================================================================
 
 # --- JetBrains IDEs ---
 .idea/
-! .idea/artifacts/
-! .idea/runConfigurations/
 *.iws
 *.iml
 *.ipr
@@ -34,10 +28,6 @@ shelf/
 
 # --- Visual Studio Code ---
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json # Можно коммитить для стандартизации среды
 *.code-workspace
 
 # --- Visual Studio ---
@@ -65,7 +55,6 @@ shelf/
 *.tlh
 *.tmp
 *.tmp_proj
-*.log
 *.vsix
 *.vcxproj.user
 *.vcxproj.filters
@@ -111,7 +100,6 @@ nbactions.xml
 *.xcodeproj/xcuserdata/
 *.xcworkspace/sharedata
 *.xcworkspace/xcuserdata/
-build/
 DerivedData/
 *.moved-aside
 *.hmap
@@ -119,9 +107,7 @@ DerivedData/
 *.dSYM.zip
 *.dSYM
 
-# ============================================================================
 # Зависимости / Dependencies
-# ============================================================================
 /node_modules/
 /bower_components/
 /vendor/          # Composer (PHP), Go, etc.
@@ -156,15 +142,14 @@ DerivedData/
 *.pyd
 * $py.class
 /pip-wheel-metadata/
+
 # Виртуальные окружения
-.env
-.venv
+.env/
+.venv/
 env/
 venv/
 ENV/
 VENV/
-*/env/
-*/venv/
 .pipenv
 .direnv/
 
@@ -186,7 +171,6 @@ VENV/
 
 # --- Java / Maven / Gradle ---
 /target/
-/build/
 /.gradle/
 /.mvn/
 *.class
@@ -199,18 +183,13 @@ hs_err_pid*
 # --- Go ---
 /vendor/
 /pkg/
-/bin/
 *.exe
 *.exe~
 *.dll
 *.so
 *.dylib
 
-# --- Rust ---
-/target/
-
 # --- .NET ---
-/bin/
 /obj/
 project.lock.json
 project.assets.json
@@ -223,21 +202,14 @@ project.assets.json
 # --- Dart / Flutter ---
 /.dart_tool/
 /.packages
-/build/
-*.iml
-*.ipr
-*.iws
 
 # --- Elixir / Mix ---
 /_build/
 /deps/
 /priv/static/ # Если генерируется сборщиком фронтенда
 
-# ============================================================================
 # Логи, Кеш, Временные файлы / Logs, Cache, Temporary Files
-# ============================================================================
 logs/
-!logs/.gitkeep
 cache/
 *.log
 npm-debug.log*
@@ -245,39 +217,28 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 pnpm-debug.log*
-*.tmp
 *.temp
 *.bkp
 *.bak
 *.swp
-*~
 *.cache
 *.pid
 *.seed
 *.pid.lock
 
-# ============================================================================
 # Сборки и Артефакты / Build Artefacts & Outputs
-# ============================================================================
-/dist/
-/build/
 /out/
 /public/
-/coverage/
 /.nyc_output/
 *.tar.gz
 *.tgz
 *.zip
 *.rar
 
-# ============================================================================
 # Конфигурационные файлы и Секреты / Config Files & Secrets
-# ============================================================================
 
 .env
 .env.*
-!.env.example
-!.env.template
 *.pem
 *.key
 *.keypair
@@ -288,10 +249,6 @@ pnpm-debug.log*
 private.key
 public.key
 credentials.*
-# config/database.yml # Пример
-# secrets.yml # Пример
-# settings.local.php # Пример
-# appsettings.Development.json # Пример
 
 # --- Специфичные для инструментов (могут содержать токены) ---
 .npmrc
@@ -301,9 +258,7 @@ credentials.*
 .aws/
 .boto
 
-# ============================================================================
 # Разное / Miscellaneous
-# ============================================================================
 
 # --- Документация ---
 /_site/
@@ -312,12 +267,12 @@ credentials.*
 # --- Тестирование ---
 .pytest_cache/
 .tox/
+.nox/
 .coverage*
 coverage*
 htmlcov/
 nosetests.xml
 pytestdebug.log
-.nox/
 .hypothesis/
 
 # --- Линтеры / Форматтеры ---
@@ -336,23 +291,10 @@ pytestdebug.log
 # --- Загруженные файлы / Данные ---
 /uploads/
 /media/
-/data/
-!/data/.gitkeep
 
 # --- Профилирование (Scalene и др.) ---
 *.prof            # Общий формат файлов профилирования
 
 
-# ============================================================================
 # Специфичное для проекта (Добавьте свои правила здесь)
-# ============================================================================
-# /my_generated_reports/
-# /specific_temp_files/
-# /prompts/
 
-
-# ============================================================================
-# Конец .gitignore
-# Не забудьте адаптировать под свой проект!
-# Если файлы уже добавлены: git rm --cached <файл_или_папка>
-# ============================================================================

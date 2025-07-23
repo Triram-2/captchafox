@@ -1,0 +1,1 @@
+PyPI package based on camoufox with native captcha passing functions and the ability to switch to selenium_driverless (for the browser GUI) for development.
