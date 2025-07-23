@@ -2,7 +2,7 @@ import os
 import shutil
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Iterator
+from typing import Any, Dict, List, Iterator, cast
 
 # Conditional import for tomllib/tomli
 if sys.version_info >= (3, 11):
@@ -37,12 +37,15 @@ os.environ["PYTHONDONTWRITEBYTECODE"] = "1"
 
 def install_project_with_deps(session: Session, *groups: str) -> None:
     """Устанавливает проект и его зависимости из указанных групп используя uv pip install."""
-    install_args: List[str] = ["-e", f".[{','.join(groups)}]"] if groups else ["-e", "."]
+    install_args: List[str] = (
+        ["-e", f".[{','.join(groups)}]"] if groups else ["-e", "."]
+    )
     # Construct a string for logging that represents the command as it would be typed
     log_command_str = "uv pip install " + " ".join(install_args)
     session.log(f"Installing with: {log_command_str}")
     session.run_always("uv", "pip", "install", *install_args, external=True)
     session.log(f"Finished: {log_command_str}")
+
 
 def create_dev_data_dir():
     current_dir = os.path.dirname((__file__))
@@ -77,14 +80,10 @@ def audit(session: Session) -> None:
     create_dev_data_dir()
 
     session.log("Запуск pip-audit для проверки уязвимостей...")
-    session.run(
-        "pip-audit",
-        "--local",
-        "-o", "data/dev/pip-audit.txt",
-        "."
-    )
+    session.run("pip-audit", "--local", "-o", "data/dev/pip-audit.txt", ".")
 
     session.log("Аудит зависимостей завершён.")
+
 
 @nox.session(python=PYTHON_VERSIONS)
 def test(session: Session) -> None:
@@ -130,15 +129,17 @@ def docs(session: Session) -> None:
     session.log("Сборка HTML документации...")
     session.run(
         "sphinx-build",
-        "-b", "html",
+        "-b",
+        "html",
         "-W",
         "--keep-going",
-        "-E",          # no cached env
-        "-T",          # full traceback
-        "-j", "auto",  # parallel
-        "-n",          # nitpicky
+        "-E",  # no cached env
+        "-T",  # full traceback
+        "-j",
+        "auto",  # parallel
+        "-n",  # nitpicky
         DOCS_DIR,
-        str(docs_build_dir)
+        str(docs_build_dir),
     )
     session.log(f"Документация собрана в: {docs_build_dir.resolve()}")
 
@@ -172,14 +173,16 @@ def profile(session: Session) -> None:
 @nox.session(python=False)
 def commit(session: Session) -> None:
     """Добавление проекта в git и коммит через commitizen"""
-    session.run('git', 'add', '.')
-    session.run('cz', 'commit')
+    session.run("git", "add", ".")
+    session.run("cz", "commit")
+
 
 @nox.session(python=False)
 def bump(session: Session) -> None:
     "Bump через commitizen + `git push -u origin main`"
-    session.run('cz', 'bump')
-    session.run('git', 'push', '-u', 'origin', 'main')
+    session.run("cz", "bump")
+    session.run("git", "push", "-u", "origin", "main")
+
 
 @nox.session(python=False)
 def build(session: Session) -> None:
@@ -300,22 +303,12 @@ def locust(session: Session) -> None:
     session.run("locust", "-f", locust_file, *session.posargs)
 
 
-# --- Сессия для CI ---
 @nox.session(python=PYTHON_VERSIONS, name="ci")
-def ci_pipeline(session: Session) -> None:
-    """Запускает основные проверки для CI: lint и test."""
-    session.log(f"Запуск CI пайплайна для Python {session.python}")
+def ci_pipeline(session: nox.Session) -> None:
+    """Запускает основные проверки CI: lint и test."""
+    python_version = session.python
+    session.log(f"Запуск CI для Python {python_version}")
 
-    # session.python is typed as str | None.
-    # session.notify expects posargs: Iterable[str] | None.
-    # If session.python is None, [None] is not Iterable[str].
-    # We ensure only a list of strings or an empty list is passed.
-    # In this specific CI context, session.python should always be a string
-    # due to parameterization with PYTHON_VERSIONS, but this satisfies Pyright's
-    # strictness based on the general type hint of session.python.
-    current_python_version_arg: List[str] = []
-    if isinstance(session.python, str):
-        current_python_version_arg.append(session.python)
-
-    session.notify("lint", current_python_version_arg)
-    session.notify("test")
+    suffix = f"-{python_version}" if isinstance(python_version, str) else ""
+    session.notify(f"lint{suffix}")
+    session.notify(f"test{suffix}")
