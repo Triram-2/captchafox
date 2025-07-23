@@ -28,15 +28,19 @@ test = [
     "pytest >= 7.0",
     "pytest-asyncio >= 0.21",
     "coverage[toml] >= 7.0",
-    "pip-audit>=2.7.0",
 ]
 
 profile = [
     "scalene >= 1.5.30",
 ]
 
-audit = [                  # TODO: проверить, нужна ли эта группа где-либо
+audit = [
     "pip-audit >= 2.7.0",
+]
+
+docs = [
+    "sphinx",
+    "sphinx-rtd-theme"
 ]
 
 dev = [
@@ -49,7 +53,8 @@ all = [
     "captchafox[test]",
     "captchafox[profile]",
     "captchafox[audit]",
-    "captchafox[dev]",
+    "captchafox[docs]",
+    "captchafox[dev]"
 ]
 
 
@@ -163,6 +168,7 @@ exclude = [
     "dist/**",
     "venv/**",
     ".venv/**",
+    ".nox/**",
     "__pycache__/**",
 ]
 
@@ -225,7 +231,7 @@ profile-interval = 0.05
 
 cpu-percent-threshold = 2
 
-outfile = "data/scalene.html"
+outfile = "data/dev/scalene.html"
 html = true
 no-web = true
 
@@ -251,16 +257,3 @@ bump_message = "chore(release): bump version $current_version → $new_version"
 allow_breaking_change = ["refactor"]
 
 change_type_map = { "feat" = "Features", "fix" = "Bug Fixes", "perf" = "Performance Improvements" }
-
-
-[tool.pip-audit]
-vulnerability_service = "OSV"
-timeout = 60
-progress_spinner = "off"
-require_hashes = true
-
-ignore_vuln = []
-skip_dep = []
-
-format = "json"
-output = "data/vulnerabilities.json"
