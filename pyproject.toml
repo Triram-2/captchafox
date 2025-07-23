@@ -1,0 +1,266 @@
+[project]
+name = "captchafox"
+version = "0.1.0"
+description = "PyPI package based on camoufox with native captcha passing functions and the ability to switch to selenium_driverless (for the browser GUI) for development"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "uvloop",
+    "camoufox",
+    "selenium_driverless"
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+
+[project.optional-dependencies]
+lint = [
+    "ruff >= 0.4.0",
+    "pyright >= 1.1.350",
+]
+
+test = [
+    "pytest >= 7.0",
+    "pytest-asyncio >= 0.21",
+    "coverage[toml] >= 7.0",
+    "pip-audit>=2.7.0",
+]
+
+profile = [
+    "scalene >= 1.5.30",
+]
+
+audit = [                  # TODO: проверить, нужна ли эта группа где-либо
+    "pip-audit >= 2.7.0",
+]
+
+dev = [
+    "nox >= 2023.4.22",
+    "commitizen >= 3.12",
+]
+
+all = [
+    "captchafox[lint]",
+    "captchafox[test]",
+    "captchafox[profile]",
+    "captchafox[audit]",
+    "captchafox[dev]",
+]
+
+
+[tool.uv]
+package = true
+
+[tool.ruff]
+line-length = 88
+indent-width = 4
+target-version = "py313"
+exclude = [
+    ".git",
+    "__pycache__",
+    ".venv",
+    "locustfile.py",
+    ".nox"
+]
+src = ["src"]
+
+[tool.ruff.lint]
+select = [
+    "E",                    # pycodestyle errors
+    "F",                    # Pyflakes
+    "W",                    # pycodestyle warnings
+    "A",                    # flake8-builtins
+    "B",                    # flake8-bugbear
+    "C",                    # flake8-comprehensions
+    "D",                    # pydocstyle
+    "N",                    # pep8-naming
+    "PL",                   # Pylint
+    "UP",                   # pyupgrade
+    "RUF",                  # Ruff-specific
+]
+ignore = [
+    "E501",
+    "D100",
+    "D103",
+    "PLR0913",
+    "D404",
+    "D107",
+    "RUF002",
+    "D415",
+    "D400",
+    "F841",
+    "D101",
+    "RUF003",
+    "PLR2004",
+    "D212",
+    "D205",
+    "UP043",
+    "UP035",
+    "D413",
+    "UP007",
+    "A002",
+    "UP006",
+    "D200",
+    "D104",
+    "D203",
+    "D300",
+    "D106",
+    "RUF001",
+    "E731",
+    "C901",
+    "D102",
+    "N805",
+    "UP036",
+    "D401",
+    "E402",
+    "B010",
+    "RUF022",
+    "PLR0915",
+    "RUF100"
+
+]
+fixable = ["ALL"]
+unfixable = []
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = true
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D103"]
+
+
+[tool.pyright]
+pythonVersion = "3.13"
+pythonPlatform = "Linux"
+typeCheckingMode = "strict"
+
+reportUntypedFunctionDecorator = true
+reportMissingTypeStubs = false
+reportUnknownVariableType = true
+reportUnknownArgumentType = true
+reportUnknownMemberType = true
+reportInvalidTypeVarUse = true
+reportUnnecessaryTypeIgnore = true
+reportUnnecessaryCast = true
+reportUnreachable = true
+
+reportImplicitOptional = true
+disableBytesTypePromotions = true
+strictListInference = true
+strictDictionaryInference = true
+strictSetInference = true
+
+useLibraryCodeForTypes = true
+include = ["src"]
+exclude = [
+    "build/**",
+    "dist/**",
+    "venv/**",
+    ".venv/**",
+    "__pycache__/**",
+]
+
+executionEnvironments = [{ root = "src" }]
+
+verboseOutput = true
+reportGeneralTypeIssues = true
+ignoreExternalImports = false
+reportTypedDictNotRequiredAccess = true
+reportPropertyTypeMismatch = true
+
+
+[[tool.pyright.overrides]]
+files = ["tests/**/*.py"]
+reportMissingTypeStubs = false
+typeCheckingMode = "basic"
+
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = []
+skip_empty = true
+show_missing = true
+
+[tool.coverage.paths]
+source = ["src"]
+
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+addopts = "-v -s"
+norecursedirs = [".git", ".venv", "__pycache__", ".idea"]
+log_cli = true
+log_cli_level = "DEBUG"
+asyncio_mode = "auto"
+
+
+[tool.hypothesis]
+deadline = 500
+verbosity = "verbose"
+max_examples = 100
+derandomize = false
+phases = ["explicit", "reuse", "generate", "shrink"]
+
+
+[tool.scalene]
+cpu = true
+memory = true
+gpu = false
+profile-all = false
+
+profile-interval = 0.05
+
+cpu-percent-threshold = 2
+
+outfile = "data/scalene.html"
+html = true
+no-web = true
+
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+
+version = "0.1.0"
+version_files = [     # TODO: не забыть вставить все остальные
+    "src/captchafox/__init__.py:__version__",
+    "pyproject.toml:version"
+]
+
+tag_format = "$version"
+
+changelog_file = "CHANGELOG.md"
+changelog_incremental = true
+update_changelog_on_bump = true
+major_version_zero = true
+
+bump_message = "chore(release): bump version $current_version → $new_version"
+
+allow_breaking_change = ["refactor"]
+
+change_type_map = { "feat" = "Features", "fix" = "Bug Fixes", "perf" = "Performance Improvements" }
+
+
+[tool.pip-audit]
+vulnerability_service = "OSV"
+timeout = 60
+progress_spinner = "off"
+require_hashes = true
+
+ignore_vuln = []
+skip_dep = []
+
+format = "json"
+output = "data/vulnerabilities.json"
