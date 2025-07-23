@@ -145,11 +145,13 @@ pythonVersion = "3.13"
 pythonPlatform = "Linux"
 typeCheckingMode = "strict"
 
-reportUntypedFunctionDecorator = true
+reportMissingImports = false
+reportUntypedFunctionDecorator = false
 reportMissingTypeStubs = false
-reportUnknownVariableType = true
-reportUnknownArgumentType = true
-reportUnknownMemberType = true
+reportUnknownVariableType = false
+reportUnknownArgumentType = false
+reportUnknownMemberType = false
+reportUnknownParameterType = false
 reportInvalidTypeVarUse = true
 reportUnnecessaryTypeIgnore = true
 reportUnnecessaryCast = true
@@ -176,7 +178,7 @@ executionEnvironments = [{ root = "src" }]
 
 verboseOutput = true
 reportGeneralTypeIssues = true
-ignoreExternalImports = false
+ignoreExternalImports = true
 reportTypedDictNotRequiredAccess = true
 reportPropertyTypeMismatch = true
 

@@ -1,21 +1,12 @@
 import os
 import shutil
-import sys
+import tomllib
+
 from pathlib import Path
-from typing import Any, Dict, List, Iterator, cast
-
-# Conditional import for tomllib/tomli
-if sys.version_info >= (3, 11):
-    import tomllib
-else:
-    try:
-        import tomli as tomllib
-    except ModuleNotFoundError:
-        print("Error: 'tomli' is not installed. Please install it for Python < 3.11.")
-        sys.exit(1)
-
+from typing import Any, Dict, List, Iterator
 
 import nox
+
 from nox import Session
 
 
@@ -48,7 +39,7 @@ def install_project_with_deps(session: Session, *groups: str) -> None:
 
 
 def create_dev_data_dir():
-    current_dir = os.path.dirname((__file__))
+    current_dir = os.path.dirname(__file__)
     dev_dir = os.path.join(current_dir, "data", "dev")
     os.makedirs(dev_dir, mode=775, exist_ok=True)
 
