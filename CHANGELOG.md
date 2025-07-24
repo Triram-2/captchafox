@@ -1,3 +1,13 @@
+## 0.5.0 (2025-07-24)
+
+### Bug Fixes
+
+- **pyproject.toml,hatch.toml**: Fixed troubles of publish
+
+### Features
+
+- **noxfile.py**: added session publish for publishing in PyPI with hatch
+
 ## 0.4.0 (2025-07-23)
 
 ### Bug Fixes
