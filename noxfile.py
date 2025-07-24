@@ -145,14 +145,7 @@ def profile(session: Session) -> None:
     try:
         session.run("scalene", f"src/{PROJECT_NAME}/main.py", *session.posargs)
 
-        outfile_setting = (
-            PYPROJECT_CONTENT.get("tool", {}).get("scalene", {}).get("outfile")
-        )
-        outfile: str
-        if isinstance(outfile_setting, str):
-            outfile = outfile_setting
-        else:
-            outfile = "scalene_report.html"
+        outfile = PYPROJECT_CONTENT.get("tool", {}).get("scalene", {}).get("outfile")
 
         session.log(f"Отчет Scalene сохранен в: {Path(outfile).resolve()}")
     except Exception as e:
@@ -241,42 +234,26 @@ def clean(session: Session) -> None:
     patterns_to_remove: List[str] = [
         "dist",
         "build",
-        "*.egg-info",
+        "**/*.egg-info",
         ".nox",
         ".pytest_cache",
-        ".coverage",
-        "coverage.xml",
-        "coverage_html_report",
-        "*.prof",
-        "profile_output",
-        "scalene_report.html",
-        "**/.mypy_cache",
         "**/.ruff_cache",
+        "**/scalene*.html",
         "**/__pycache__",
         f"{DOCS_DIR}/_build",
-        "vulnerabilities.json",
+        f'**/pip-audit.txt'
+        ".coverage",
+        "**/coverage*"
     ]
     for pattern in patterns_to_remove:
-        try:
-            if "*" in pattern or "?" in pattern:
-                # Path.glob returns a generator of Path objects
-                path_iter: Iterator[Path] = Path(".").glob(pattern)
-                for path_obj in path_iter:  # path_obj is a Path object
-                    session.log(f"Удаление {path_obj}")
-                    if path_obj.is_dir():
-                        shutil.rmtree(path_obj, ignore_errors=True)
-                    else:
-                        path_obj.unlink(missing_ok=True)
-            else:
-                path_obj: Path = Path(pattern)  # path_obj is a Path object
-                if path_obj.exists():
-                    session.log(f"Удаление {path_obj}")
-                    if path_obj.is_dir():
-                        shutil.rmtree(path_obj, ignore_errors=True)
-                    else:
-                        path_obj.unlink(missing_ok=True)
-        except Exception as e:
-            session.warn(f"Не удалось удалить {pattern}: {e}")
+        if "*" in pattern or "?" in pattern:
+            path_iter: Iterator[Path] = Path(".").glob(pattern)
+            for path_obj in path_iter:
+                session.log(f"Удаление {path_obj}")
+                if path_obj.is_dir():
+                    shutil.rmtree(path_obj, ignore_errors=True)
+                else:
+                    path_obj.unlink(missing_ok=True)
     session.log("Очистка завершена.")
 
 
