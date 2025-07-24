@@ -1,3 +1,10 @@
+## 0.5.1 (2025-07-24)
+
+### Bug Fixes
+
+- **uv.lock**: upgraded uv.lock
+- **noxfile.py**: added clean session in publish session
+
 ## 0.5.0 (2025-07-24)
 
 ### Bug Fixes

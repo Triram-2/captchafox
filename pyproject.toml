@@ -1,6 +1,6 @@
 [project]
 name = "captchafox"
-version = "0.5.0"
+version = "0.5.1"
 description = "PyPI package based on camoufox with native captcha passing functions and the ability to switch to selenium_driverless (for the browser GUI) for development"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -245,7 +245,7 @@ no-web = true
 [tool.commitizen]
 name = "cz_conventional_commits"
 
-version = "0.5.0"
+version = "0.5.1"
 version_files = [     # TODO: не забыть вставить все остальные
     "src/captchafox/__init__.py:__version__",
     "pyproject.toml:version"
