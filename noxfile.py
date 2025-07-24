@@ -176,6 +176,13 @@ def bump(session: Session) -> None:
 
 
 @nox.session(python=False)
+def release(session: Session) -> None:
+    session.notify("commit")
+    session.notify("bump")
+    session.notify("publish")
+
+
+@nox.session(python=False)
 def build(session: Session) -> None:
     """Сборка Docker-образа."""
     project_version_any: Any = PYPROJECT_CONTENT["project"]["version"]
@@ -307,7 +314,7 @@ def ci_pipeline(session: nox.Session) -> None:
 
 @nox.session(python=False)
 def publish(session: nox.Session) -> None:
-    session.notify('clean')
-    session.run('hatch', 'clean')
-    session.run('hatch', 'build')
-    session.run('hatch', 'publish', '-y')
+    session.notify("clean")
+    session.run("hatch", "clean")
+    session.run("hatch", "build")
+    session.run("hatch", "publish", "-y")
