@@ -49,6 +49,7 @@ docs = [
 dev = [
     "nox >= 2023.4.22",
     "commitizen >= 3.12",
+    "hatch"
 ]
 
 all = [
