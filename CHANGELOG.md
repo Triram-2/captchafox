@@ -1,3 +1,9 @@
+## 0.6.0 (2025-07-24)
+
+### Features
+
+- **noxfile.py**: added session release
+
 ## 0.5.1 (2025-07-24)
 
 ### Bug Fixes
