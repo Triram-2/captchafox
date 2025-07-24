@@ -307,6 +307,7 @@ def ci_pipeline(session: nox.Session) -> None:
 
 @nox.session(python=False)
 def publish(session: nox.Session) -> None:
+    session.notify('clean')
     session.run('hatch', 'clean')
     session.run('hatch', 'build')
     session.run('hatch', 'publish', '-y')
