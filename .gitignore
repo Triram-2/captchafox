@@ -237,6 +237,7 @@ pnpm-debug.log*
 
 # Конфигурационные файлы и Секреты / Config Files & Secrets
 
+.
 .env
 .env.*
 *.pem

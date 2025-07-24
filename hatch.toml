@@ -1,16 +1,12 @@
 [version]
 source = "regex"
 scheme = "standard"
-path = "src/captchafox/__init__"
+path = "src/captchafox/__init__.py"
 
 [build]
 reproducible = true
 directory = "dist"
 dev-mode-dirs = ["src"]
-
-[build.targets.sdist]
-packages = ["src/captchafox"]
-only-packages = true
 
 [envs.virtual]
 python = "3.12"
