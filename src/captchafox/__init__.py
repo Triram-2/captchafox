@@ -1,6 +1,7 @@
-import pathlib, sys
+import sys
+from pathlib import Path
 
-root = pathlib.Path(__file__).resolve().parent.parent / "captchafox"
+root = Path(__file__).resolve().parent.parent / "captchafox"
 sys.path.insert(0, str(root))
 
 
