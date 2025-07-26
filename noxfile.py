@@ -41,7 +41,8 @@ def install_project_with_deps(session: Session, *groups: str) -> None:
 def create_dev_data_dir():
     current_dir = os.path.dirname(__file__)
     dev_dir = os.path.join(current_dir, "data", "dev")
-    os.makedirs(dev_dir, mode=775, exist_ok=True)
+    os.makedirs(dev_dir, exist_ok=True)
+    os.chmod(dev_dir, 0o775)
 
 
 @nox.session(python=PYTHON_VERSIONS)
@@ -169,13 +170,6 @@ def bump(session: Session) -> None:
 
 
 @nox.session(python=False)
-def release(session: Session) -> None:
-    session.notify("commit")
-    session.notify("bump")
-    session.notify("publish")
-
-
-@nox.session(python=False)
 def build(session: Session) -> None:
     """Сборка Docker-образа."""
     project_version_any: Any = PYPROJECT_CONTENT["project"]["version"]
@@ -291,7 +285,16 @@ def ci_pipeline(session: nox.Session) -> None:
 
 @nox.session(python=False)
 def publish(session: nox.Session) -> None:
+    "Публикация на PyPI с помощью Hatch"
     session.notify("clean")
     session.run("hatch", "clean")
     session.run("hatch", "build")
     session.run("hatch", "publish", "-y")
+
+
+@nox.session(python=False)
+def release(session: Session) -> None:
+    "commit+bump+publish"
+    session.notify("commit")
+    session.notify("bump")
+    session.notify("publish")

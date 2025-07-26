@@ -1,4 +1,9 @@
-PyPI package based on camoufox with native captcha passing functions and the ability to switch to selenium_driverless (for the browser GUI) for development.
+Ультра anti-detect браузер на базе camoufox. 
+
+Возможности:
+1. Абсолютно случайное создание отпечатков в каждом браузере
+2. Нативная поддержка прохождения многих типов капч
+3. 
 
 TODO:
 1. Add UI for selenium_driverless
