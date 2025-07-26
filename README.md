@@ -1,11 +1,20 @@
-Ультра anti-detect браузер на базе camoufox. 
+# Ультра anti-detect браузер на базе camoufox. 
 
-Возможности:
+## Возможности:
 1. Абсолютно случайное создание отпечатков в каждом браузере
 2. Нативная поддержка прохождения многих типов капч
-3. 
+3. Возможность нативной смены браузера(по дефолту camoufox) без изменения внутреннего кода на selenium_driverless для UI браузера(полезно при разработке)
 
-TODO:
-1. Add UI for selenium_driverless
-2. Add statistic data for full random browser fingerprints generating
-3. Add UI for integrations capsola, 2captcha and others for passing captchas
+## Установка:
+### Добавить в проект:
+`uv add captchafox`
+### С uv:
+`uv pip install captchafox`
+### С pip:
+`pip install captchafox`
+
+## Быстрый старт:
+...
+
+## Изменения от Playwright API:
+...
