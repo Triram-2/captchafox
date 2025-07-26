@@ -1,3 +1,17 @@
+## 0.7.0 (2025-07-26)
+
+### Bug Fixes
+
+- **src**: fix imports
+- **noxfile**: fix permissions data/dev
+- **noxfile**: added comments
+- **noxfile.py**: no comment
+
+### Features
+
+- **core**: add paths.py
+- **TODO.md**: added TODO.md
+
 ## 0.6.0 (2025-07-24)
 
 ### Features
