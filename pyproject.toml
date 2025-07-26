@@ -28,6 +28,7 @@ lint = [
 ]
 
 test = [
+    "captchafox",
     "pytest",
     "pytest-asyncio",
     "coverage[toml]",

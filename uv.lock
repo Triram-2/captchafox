@@ -210,7 +210,7 @@ wheels = [
 
 [[package]]
 name = "captchafox"
-version = "0.5.0"
+version = "0.6.0"
 source = { editable = "." }
 dependencies = [
     { name = "camoufox" },
@@ -267,16 +267,16 @@ requires-dist = [
     { name = "captchafox", extras = ["lint"], marker = "extra == 'all'" },
     { name = "captchafox", extras = ["profile"], marker = "extra == 'all'" },
     { name = "captchafox", extras = ["test"], marker = "extra == 'all'" },
-    { name = "commitizen", marker = "extra == 'dev'", specifier = ">=3.12" },
-    { name = "coverage", extras = ["toml"], marker = "extra == 'test'", specifier = ">=7.0" },
+    { name = "commitizen", marker = "extra == 'dev'" },
+    { name = "coverage", extras = ["toml"], marker = "extra == 'test'" },
     { name = "hatch", marker = "extra == 'dev'" },
-    { name = "nox", marker = "extra == 'dev'", specifier = ">=2023.4.22" },
-    { name = "pip-audit", marker = "extra == 'audit'", specifier = ">=2.7.0" },
-    { name = "pyright", marker = "extra == 'lint'", specifier = ">=1.1.350" },
-    { name = "pytest", marker = "extra == 'test'", specifier = ">=7.0" },
-    { name = "pytest-asyncio", marker = "extra == 'test'", specifier = ">=0.21" },
-    { name = "ruff", marker = "extra == 'lint'", specifier = ">=0.4.0" },
-    { name = "scalene", marker = "extra == 'profile'", specifier = ">=1.5.30" },
+    { name = "nox", marker = "extra == 'dev'" },
+    { name = "pip-audit", marker = "extra == 'audit'" },
+    { name = "pyright", marker = "extra == 'lint'" },
+    { name = "pytest", marker = "extra == 'test'" },
+    { name = "pytest-asyncio", marker = "extra == 'test'" },
+    { name = "ruff", marker = "extra == 'lint'" },
+    { name = "scalene", marker = "extra == 'profile'" },
     { name = "selenium-driverless" },
     { name = "sphinx", marker = "extra == 'docs'" },
     { name = "sphinx-rtd-theme", marker = "extra == 'docs'" },
