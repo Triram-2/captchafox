@@ -235,9 +235,8 @@ def clean(session: Session) -> None:
         "**/scalene*.html",
         "**/__pycache__",
         f"{DOCS_DIR}/_build",
-        f'**/pip-audit.txt'
-        ".coverage",
-        "**/coverage*"
+        "**/pip-audit.txt.coverage",
+        "**/coverage*",
     ]
     for pattern in patterns_to_remove:
         if "*" in pattern or "?" in pattern:

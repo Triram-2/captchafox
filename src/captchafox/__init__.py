@@ -1,3 +1,9 @@
+import pathlib, sys
+
+root = pathlib.Path(__file__).resolve().parent.parent / "captchafox"
+sys.path.insert(0, str(root))
+
+
 from browser import Captchafox
 
 
