@@ -11,4 +11,4 @@ from fingerprints import GeneratorOptions
 
 __all__ = ["Captchafox", "__version__", "GeneratorOptions"]
 
-__version__: str = "0.7.0"
+__version__: str = "0.8.0"

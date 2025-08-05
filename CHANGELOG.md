@@ -1,3 +1,13 @@
+## 0.8.0 (2025-08-06)
+
+### Bug Fixes
+
+- **__init__**: fix lint error
+
+### Features
+
+- **structue**: updated
+
 ## 0.7.0 (2025-07-26)
 
 ### Bug Fixes
