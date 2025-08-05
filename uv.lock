@@ -210,7 +210,7 @@ wheels = [
 
 [[package]]
 name = "captchafox"
-version = "0.6.0"
+version = "0.7.0"
 source = { editable = "." }
 dependencies = [
     { name = "camoufox" },
@@ -261,6 +261,7 @@ test = [
 [package.metadata]
 requires-dist = [
     { name = "camoufox" },
+    { name = "captchafox", marker = "extra == 'test'" },
     { name = "captchafox", extras = ["audit"], marker = "extra == 'all'" },
     { name = "captchafox", extras = ["dev"], marker = "extra == 'all'" },
     { name = "captchafox", extras = ["docs"], marker = "extra == 'all'" },

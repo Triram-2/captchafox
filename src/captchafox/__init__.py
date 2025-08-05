@@ -6,8 +6,9 @@ sys.path.insert(0, str(root))
 
 
 from browser import Captchafox
+from fingerprints import GeneratorOptions
 
 
-__all__ = ["Captchafox", "__version__"]
+__all__ = ["Captchafox", "__version__", "GeneratorOptions"]
 
 __version__: str = "0.7.0"

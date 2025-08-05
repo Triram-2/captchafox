@@ -7,7 +7,7 @@ requires-python = ">=3.12"
 dependencies = [
     "uvloop",
     "camoufox",
-    "selenium_driverless"
+    "selenium_driverless",
 ]
 
 [project.urls]
