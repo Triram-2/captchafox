@@ -1,3 +1,9 @@
+## 0.9.1 (2025-08-06)
+
+### Bug Fixes
+
+- **noxfile**: upgraded release
+
 ## 0.9.0 (2025-08-06)
 
 ### Features
