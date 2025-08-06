@@ -13,9 +13,7 @@ from nox import Session
 nox.options.default_venv_backend = "uv"
 
 # Type hint for PYPROJECT_CONTENT
-PYPROJECT_CONTENT: Dict[str, Any] = tomllib.loads(
-    Path("pyproject.toml").read_text(encoding="utf-8")
-)
+PYPROJECT_CONTENT: Dict[str, Any] = tomllib.loads(Path("pyproject.toml").read_text(encoding="utf-8"))
 
 PROJECT_NAME: str = PYPROJECT_CONTENT["project"]["name"]
 PYTHON_VERSIONS: List[str] = ["3.12", "3.13"]
@@ -28,9 +26,7 @@ os.environ["PYTHONDONTWRITEBYTECODE"] = "1"
 
 def install_project_with_deps(session: Session, *groups: str) -> None:
     """Устанавливает проект и его зависимости из указанных групп используя uv pip install."""
-    install_args: List[str] = (
-        ["-e", f".[{','.join(groups)}]"] if groups else ["-e", "."]
-    )
+    install_args: List[str] = ["-e", f".[{','.join(groups)}]"] if groups else ["-e", "."]
     # Construct a string for logging that represents the command as it would be typed
     log_command_str = "uv pip install " + " ".join(install_args)
     session.log(f"Installing with: {log_command_str}")
@@ -84,24 +80,14 @@ def test(session: Session) -> None:
     install_project_with_deps(session, "test")
 
     session.log("Запуск тестов с coverage...")
-    session.run(
-        "coverage",
-        "run",
-        "--source",
-        SRC_DIR,
-        "-m",
-        "pytest",
-        TESTS_DIR,
-        *session.posargs,
-        env={"PYTHONPATH": SRC_DIR},
-    )
+    session.run("coverage", "run", "--source", SRC_DIR, "-m", "pytest", TESTS_DIR, *session.posargs, env={"PYTHONPATH": SRC_DIR})
 
     session.log(f"Проверка покрытия кода (должно быть >= {COVERAGE_FAIL_UNDER}%)...")
     session.run("coverage", "report", "-m", f"--fail-under={COVERAGE_FAIL_UNDER}")
 
     session.log("Генерация отчета о покрытии в формате HTML и XML...")
-    session.run("coverage", "html", "-d", "data/dev")
-    session.run("coverage", "xml", "-o", "data/dev")
+    session.run("coverage", "html", "-d", "data/dev/coverage.html")
+    session.run("coverage", "xml", "-o", "data/dev/coverage.xml")
 
     session.log("Тестирование завершено успешно.")
 
@@ -150,9 +136,7 @@ def profile(session: Session) -> None:
 
         session.log(f"Отчет Scalene сохранен в: {Path(outfile).resolve()}")
     except Exception as e:
-        session.error(
-            f"Ошибка при запуске Scalene: {e}. Проверьте команду запуска и конфигурацию."
-        )
+        session.error(f"Ошибка при запуске Scalene: {e}. Проверьте команду запуска и конфигурацию.")
 
 
 @nox.session(python=False)
@@ -180,22 +164,10 @@ def build(session: Session) -> None:
 
     session.log(f"Сборка Docker-образа {image_tag} и {latest_tag}...")
     try:
-        session.run(
-            "docker",
-            "build",
-            ".",
-            "-t",
-            image_tag,
-            "-t",
-            latest_tag,
-            *session.posargs,
-            external=True,
-        )
+        session.run("docker", "build", ".", "-t", image_tag, "-t", latest_tag, *session.posargs, external=True)
         session.log("Сборка Docker-образа завершена успешно.")
     except Exception as e:
-        session.error(
-            f"Ошибка при сборке Docker-образа. Убедитесь, что Docker запущен. Ошибка: {e}"
-        )
+        session.error(f"Ошибка при сборке Docker-образа. Убедитесь, что Docker запущен. Ошибка: {e}")
 
 
 @nox.session(python=False)
@@ -204,9 +176,7 @@ def compose_rebuild(session: Session) -> None:
     image_name: str = "{{cookiecutter.project_slug}}-app"
 
     session.log("Остановка и очистка старых контейнеров...")
-    session.run(
-        "docker", "compose", "down", "--volumes", "--remove-orphans", external=True
-    )
+    session.run("docker", "compose", "down", "--volumes", "--remove-orphans", external=True)
 
     session.log(f"Удаление старого образа {image_name}...")
     session.run("docker", "rmi", image_name, external=True, success_codes=[0, 1])
@@ -258,9 +228,7 @@ def locust(session: Session) -> None:
 
     locust_file: str = "locustfile.py"
     if not Path(locust_file).exists():
-        session.warn(
-            f"Файл {locust_file} не найден. Для запуска Locust необходимо создать его и определить сценарии нагрузки."
-        )
+        session.warn(f"Файл {locust_file} не найден. Для запуска Locust необходимо создать его и определить сценарии нагрузки.")
         session.log(
             "Пример команды, если locustfile.py существует: "
             "locust -f locustfile.py --host=http://localhost:{{cookiecutter.app_port_host}}"

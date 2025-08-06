@@ -3,10 +3,10 @@ import random
 
 def generate_os() -> str:
     "Случайная операционка"
-    num = random.choice()
+    num = random.random()
     if num < 0.901:
-        return 'windows'
+        return "windows"
     elif num < 0.945:
-        return 'macos'
+        return "macos"
     else:
-        return 'linux'
+        return "linux"

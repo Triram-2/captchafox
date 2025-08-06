@@ -6,8 +6,8 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "uvloop",
-    "camoufox",
-    "selenium_driverless",
+    "camoufox[geoip]",
+    "httpx>=0.28.1",
 ]
 
 [project.urls]
@@ -67,7 +67,7 @@ all = [
 package = true
 
 [tool.ruff]
-line-length = 88
+line-length = 130
 indent-width = 4
 target-version = "py313"
 exclude = [
@@ -131,8 +131,8 @@ ignore = [
     "B010",
     "RUF022",
     "PLR0915",
-    "RUF100"
-
+    "RUF100",
+    "UP045"
 ]
 fixable = ["ALL"]
 unfixable = []
@@ -161,6 +161,8 @@ reportInvalidTypeVarUse = true
 reportUnnecessaryTypeIgnore = true
 reportUnnecessaryCast = true
 reportUnreachable = true
+reportAttributeAccessIssue = false
+reportGeneralTypeIssues = false
 
 reportImplicitOptional = true
 disableBytesTypePromotions = true
@@ -182,7 +184,6 @@ exclude = [
 executionEnvironments = [{ root = "src" }]
 
 verboseOutput = true
-reportGeneralTypeIssues = true
 ignoreExternalImports = true
 reportTypedDictNotRequiredAccess = true
 reportPropertyTypeMismatch = true

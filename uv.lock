@@ -210,10 +210,12 @@ wheels = [
 
 [[package]]
 name = "captchafox"
-version = "0.7.0"
+version = "0.8.0"
 source = { editable = "." }
 dependencies = [
+    { name = "browserforge" },
     { name = "camoufox" },
+    { name = "httpx" },
     { name = "selenium-driverless" },
     { name = "uvloop" },
 ]
@@ -260,6 +262,7 @@ test = [
 
 [package.metadata]
 requires-dist = [
+    { name = "browserforge", specifier = ">=1.2.3" },
     { name = "camoufox" },
     { name = "captchafox", marker = "extra == 'test'" },
     { name = "captchafox", extras = ["audit"], marker = "extra == 'all'" },
@@ -271,6 +274,7 @@ requires-dist = [
     { name = "commitizen", marker = "extra == 'dev'" },
     { name = "coverage", extras = ["toml"], marker = "extra == 'test'" },
     { name = "hatch", marker = "extra == 'dev'" },
+    { name = "httpx", specifier = ">=0.28.1" },
     { name = "nox", marker = "extra == 'dev'" },
     { name = "pip-audit", marker = "extra == 'audit'" },
     { name = "pyright", marker = "extra == 'lint'" },
