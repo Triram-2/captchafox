@@ -262,7 +262,7 @@ def publish(session: nox.Session) -> None:
 @nox.session(python=False)
 def release(session: Session) -> None:
     "commit+bump+publish"
-    session.notify("ci-3.13")
+    session.notify("lint-3.13")
     session.notify("commit")
     session.notify("bump")
     session.notify("publish")
