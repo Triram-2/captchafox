@@ -1,3 +1,9 @@
+## 0.10.0 (2025-08-12)
+
+### Features
+
+- **captchafox**: added supporting running without context manager
+
 ## 0.9.2 (2025-08-06)
 
 ### Bug Fixes

@@ -11,4 +11,4 @@ from generatoroptions import GeneratorOptions
 
 __all__ = ["Captchafox", "__version__", "GeneratorOptions"]
 
-__version__ = "0.9.2"
+__version__ = "0.10.0"
