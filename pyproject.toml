@@ -7,7 +7,7 @@ requires-python = ">=3.12"
 dependencies = [
     "uvloop",
     "camoufox[geoip]",
-    "httpx>=0.28.1",
+    "httpx",
 ]
 
 [project.urls]

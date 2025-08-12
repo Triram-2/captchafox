@@ -196,17 +196,19 @@ def clean(session: Session) -> None:
     """Удаляет временные файлы и папки сборки/тестирования."""
     session.log("Очистка...")
     patterns_to_remove: List[str] = [
-        "dist",
-        "build",
+        "**/dist/**",
+        "**/build",
         "**/*.egg-info",
-        ".nox",
-        ".pytest_cache",
+        "**/.nox",
+        "**/.pytest_cache",
         "**/.ruff_cache",
         "**/scalene*.html",
         "**/__pycache__",
-        f"{DOCS_DIR}/_build",
+        "**/_build",
         "**/pip-audit.txt.coverage",
-        "**/coverage*",
+        "**/.coverage*",
+        "**/data/dev/**",
+        "**/.venv",
     ]
     for pattern in patterns_to_remove:
         if "*" in pattern or "?" in pattern:
